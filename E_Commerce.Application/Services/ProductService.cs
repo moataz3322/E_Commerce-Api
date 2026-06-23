@@ -7,11 +7,12 @@ using AutoMapper;
 using E_Commerce.Application.Common;
 using E_Commerce.Application.Contracts;
 using E_Commerce.Application.Dtos.Products;
+using E_Commerce.Application.Specifications;
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Domain.Entities.Products;
 
 namespace E_Commerce.Application.Services
-{
+{//da al byst5dm al Specfication
     class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -39,20 +40,22 @@ namespace E_Commerce.Application.Services
 
 
 
-
-
         }
 
-        public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(CancellationToken ct = default)
+        public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(ProductQueryParams queryParams, CancellationToken ct = default)
         {
-            
-            var products=await _unitOfWork.GetRepo<Product,int>().GetAllAsync(ct);
+            //ana 3mlt al calss al 4ayl al includes 34an ab3tha ll method bta3t al get All Async low m3aya include
+            var spec = new ProductWithTypeAndBrandSpec(queryParams);
+
+            var products=await _unitOfWork.GetRepo<Product,int>().GetAllAsync(spec);
 
             var result = _mapper.Map<IReadOnlyList<ProductDto>>(products);
 
             return Result<IReadOnlyList<ProductDto>>.Ok(result);
 
         }
+
+      
 
         public async Task<Result<IReadOnlyList<TypeDto>>> GetAllTypesAsync(CancellationToken ct = default)
         {
@@ -63,7 +66,8 @@ namespace E_Commerce.Application.Services
 
         public async Task<Result<ProductDto>> GetProductByIdAsync(int id, CancellationToken ct = default)
         {
-            var product =await _unitOfWork.GetRepo<Product, int>().GetByIdAsync(id, ct: ct);
+            var spec = new ProductWithTypeAndBrandSpec(id);
+            var product =await _unitOfWork.GetRepo<Product, int>().GetByIdAsync(spec);
             if (product == null)
             {
                 return Result<ProductDto>.Fail(Error.NotFound($"Product with id {id} Is Not Found"));

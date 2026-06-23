@@ -15,7 +15,11 @@ namespace E_Commerce.Domain.Contracts
         void Remove(TEntity entity);
         Task<TEntity?> GetByIdAsync(Tkey id, CancellationToken ct=default);
 
+        //ana mstni mnk al condtion msh mstny mnk id
+        Task<TEntity?> GetByIdAsync(ISpecifications<TEntity,Tkey> spec, CancellationToken ct=default);
+
         Task<IReadOnlyList<TEntity>?> GetAllAsync(CancellationToken ct = default);
+        Task<IReadOnlyList<TEntity>?> GetAllAsync(ISpecifications<TEntity,Tkey> Spec,CancellationToken ct = default);
 
 
     }

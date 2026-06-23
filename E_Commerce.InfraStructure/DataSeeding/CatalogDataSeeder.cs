@@ -72,6 +72,7 @@ namespace E_Commerce.InfraStructure.DataSeeding
         private async Task SeedIfEmptyAsync<T,Tkey>(string rootPath,string fileName , CancellationToken ct) where T : BaseEntity<Tkey>
         
         {
+           
             //check low al T feha data wala la2 al T proucts , type , brand
             var checkResult = await dbContext.Set<T>().AnyAsync(ct);
             if ( checkResult)

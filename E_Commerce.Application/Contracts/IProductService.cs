@@ -13,7 +13,7 @@ namespace E_Commerce.Application.Contracts
 
         //Hna ana 3ayz arg3 Result Pattren ana m7tag a3rf bs succes wla la2 w eh al error
         //
-        Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(CancellationToken ct=default);
+        Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(ProductQueryParams parms,CancellationToken ct=default);
         Task<Result<IReadOnlyList<BrandDto>>> GetAllBrandsAsync(CancellationToken ct=default);
         Task<Result<IReadOnlyList<TypeDto>>> GetAllTypesAsync(CancellationToken ct=default);
 
