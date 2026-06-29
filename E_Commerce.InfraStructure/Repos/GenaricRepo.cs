@@ -73,6 +73,13 @@ namespace E_Commerce.InfraStructure.Repos
             return query.FirstOrDefaultAsync(ct);
         }
 
+        public async Task<int> GetCount(ISpecifications<TEntity, Tkey> Spec, CancellationToken ct = default)
+        {//Here will check for Ceritria Only Thats why im going to use same evaluator but with new Class Specification
+
+            //mtnsa4 al bykwnlk al query aslun howa al evaluator
+            return await Evaluator.CreateQuery(dbContext.Set<TEntity>(), Spec).CountAsync();
+        }
+
         public void Remove(TEntity entity) => dbContext.Set<TEntity>().Remove(entity);
 
         public void Update(TEntity entity)=>dbContext.Set<TEntity>().Update(entity);

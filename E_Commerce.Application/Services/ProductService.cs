@@ -42,16 +42,20 @@ namespace E_Commerce.Application.Services
 
         }
 
-        public async Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(ProductQueryParams queryParams, CancellationToken ct = default)
+        public async Task<Result<paginatedResult<ProductDto>>> GetAllProductsAsync(ProductQueryParams queryParams, CancellationToken ct = default)
         {
             //ana 3mlt al calss al 4ayl al includes 34an ab3tha ll method bta3t al get All Async low m3aya include
             var spec = new ProductWithTypeAndBrandSpec(queryParams);
 
             var products=await _unitOfWork.GetRepo<Product,int>().GetAllAsync(spec);
 
-            var result = _mapper.Map<IReadOnlyList<ProductDto>>(products);
+            var data = _mapper.Map<IReadOnlyList<ProductDto>>(products);
 
-            return Result<IReadOnlyList<ProductDto>>.Ok(result);
+            //Al query params hna msh hta5od 7aga 8er al certiria ant al 3aml kda hnak
+            var countSpec = new PaginationSpecifications(queryParams);
+            var dataCount =await _unitOfWork.GetRepo<Product, int>().GetCount(countSpec);
+            var paginated = new paginatedResult<ProductDto>(queryParams.PageSize,queryParams.PageIndex, dataCount, data);
+            return Result<paginatedResult<ProductDto>>.Ok(paginated);
 
         }
 

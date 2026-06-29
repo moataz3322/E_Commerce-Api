@@ -11,6 +11,7 @@ using E_Commerce.InfraStructure.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace E_Commerce.InfraStructure
 {
@@ -30,8 +31,11 @@ namespace E_Commerce.InfraStructure
             services.AddKeyedScoped<IDataSeeder,CatalogDataSeeder>("Catalog");
             //  services.AddKeyedScoped<IDataSeeder, IdedntyDataSeeder>("Identitiy");
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IConnectionMultiplexer>(
+                configure => { return ConnectionMultiplexer.Connect(config.GetConnectionString("RedisConnection")!);
+            });
 
-
+         services.AddScoped<IBasketRepo , BasketRepo>();
 
             //Ht3ml reg ll genaric w al UOW fen ???!
 
