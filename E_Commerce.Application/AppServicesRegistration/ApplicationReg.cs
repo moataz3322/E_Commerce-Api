@@ -37,6 +37,10 @@ namespace E_Commerce.Application.AppServicesRegistration
             services.AddAutoMapper(c => { }, typeof(ApplicationReg).Assembly);
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBasketService, BasketService>();
+            //
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            //test
+            services.AddScoped<IAuthTest, AuthTestService>();
             return services;
         }
     }

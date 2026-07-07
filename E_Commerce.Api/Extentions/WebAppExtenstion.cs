@@ -11,7 +11,11 @@ namespace E_Commerce.Api.Extentions
 
             using var scope = app.Services.CreateScope();
             var seeder = scope.ServiceProvider.GetRequiredKeyedService<IDataSeeder>("Catalog");
-            await seeder.SeedDataAsync();
+            var identitySeeder = scope.ServiceProvider.GetRequiredKeyedService<IDataSeeder>("Identity");
+            var identitySeederTest = scope.ServiceProvider.GetRequiredKeyedService<IDataSeeder>("IdentityTest");
+            await  seeder.SeedDataAsync();
+            await  identitySeeder.SeedDataAsync();
+            await identitySeederTest.SeedDataAsync();
             //Return ll app y3ni ba5od al object adef feh 7aga w arg3ha tany
             return app;
 
