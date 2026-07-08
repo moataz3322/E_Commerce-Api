@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Application.Common;
 using E_Commerce.Application.Contracts;
 using E_Commerce.Application.Dtos.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace E_Commerce.Api.Controllers
         }
 
         //get all products
+        [Authorize]
         [HttpGet]
 
         public async Task<ActionResult<paginatedResult<ProductDto>>> GetAllProduct([FromQuery]ProductQueryParams param , CancellationToken ct)
@@ -28,6 +30,7 @@ namespace E_Commerce.Api.Controllers
         }
         //get product by id
 
+        [Authorize]
         [HttpGet("{id}")]
         //de badel l mslan ant ba3t id w ml2to4 f nafs al w2t al FrontEnd mtwk3 4akl mo3yn
         // al over load da bt2olo al 4akl bta3o 34an kda btrg3lo 4akl al object typeof()

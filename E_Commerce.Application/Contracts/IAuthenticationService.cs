@@ -15,16 +15,16 @@ namespace E_Commerce.Application.Contracts
 
         Task<Result<UserDto>> LoginAsync(LoginDto loginDto, CancellationToken ct = default);
 
+        //return =>Email/Pass =>Token ,email,DisplayName  
+        Task<Result<UserDto>> RegisterAsync(RegisterDto registerDto, CancellationToken ct = default);
 
+        Task<Result<bool>> CheckEmailExists(string email,CancellationToken ct=default);
 
+        Task<Result<UserDto>> GetCurrentUser(string email, CancellationToken ct = default);
+        //hna ant m7tag al identity 34an al UserManger
+        Task<Result<AdressDto>> GetUserAdress(string email, CancellationToken ct = default);
 
-
-
-
-
-
-
-
+        Task<Result<AdressDto>> UpsertUserAdressAsync(string email, AdressDto adressDto, CancellationToken ct);
 
 
 

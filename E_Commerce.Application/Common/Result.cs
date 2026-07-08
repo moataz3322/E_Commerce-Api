@@ -80,9 +80,9 @@ namespace E_Commerce.Application.Common
         //Operator OverLoading
          // aftkr As2l 3ala de 34an low mt2ate4
 
-        //public static implicit operator Result<TValue>(TValue value) => Ok(value);
+    public static implicit operator Result<TValue>(TValue value) => Ok(value);
 
-        //public static implicit operator Result<TValue>(Error error) => Fail(error);
+  public static implicit operator Result<TValue>(Error error) => Fail(error);
 
 
 

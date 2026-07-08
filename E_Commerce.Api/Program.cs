@@ -1,9 +1,11 @@
 
+using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using E_Commerce.Api.Extentions;
 using E_Commerce.Application.AppServicesRegistration;
 using E_Commerce.Domain.Contracts;
 using E_Commerce.InfraStructure;
+using E_Commerce.InfraStructure.Identity.Services;
 
 namespace E_Commerce.Api
 {
@@ -24,11 +26,11 @@ namespace E_Commerce.Api
 
             builder.Services.AddInfraServices(builder.Configuration);
 
-            builder.Services.AddApplicationServices(); 
+            builder.Services.AddApplicationServices();
             #endregion
             //***********************
 
-
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWT"));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
