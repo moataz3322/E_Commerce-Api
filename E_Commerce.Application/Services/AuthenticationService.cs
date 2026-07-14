@@ -26,7 +26,7 @@ namespace E_Commerce.Application.Services
         }
 
         public async Task<Result<UserDto>> GetCurrentUser(string email, CancellationToken ct = default)
-        {
+        {//HNA
          var IdentitYuserResult = await  identityService.FindUserByEmailAsync(email, ct);
 
             //Generate New Token

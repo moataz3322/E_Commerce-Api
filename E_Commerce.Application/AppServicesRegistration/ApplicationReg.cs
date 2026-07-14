@@ -41,6 +41,7 @@ namespace E_Commerce.Application.AppServicesRegistration
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             //test
             services.AddScoped<IAuthTest, AuthTestService>();
+            services.AddScoped<IOrderService, OrderService>();
             return services;
         }
     }

@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Domain.Entities.Common;
+using E_Commerce.Domain.Entities.Order;
 using E_Commerce.Domain.Entities.Products;
 using E_Commerce.InfraStructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace E_Commerce.InfraStructure.DataSeeding
               await  SeedIfEmptyAsync<ProductBrand,int>(seedRoot, "brands.json",ct);
               await  SeedIfEmptyAsync<ProductType,int>(seedRoot, "types.json",ct);
               await  SeedIfEmptyAsync<Product,int>(seedRoot, "products.json",ct);
+              await  SeedIfEmptyAsync<DeliveryMethod,int>(seedRoot, "delivery .json", ct);
 
                 //Low far2 m3ak kam row at3mlo insert ast2blo f result
             int result=  await  dbContext.SaveChangesAsync(ct);
